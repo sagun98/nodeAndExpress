@@ -1,4 +1,5 @@
 ## Notes: 
+
   
 ## Creating public folder  
 
@@ -6,7 +7,7 @@
 app.use (express.stactic('app/public');
 ```
   
-
+  
 ## Automation of workflow  
 
 #### Auto Update the server
@@ -45,5 +46,89 @@ app.set('view engine',???)
 app.set('view',???)
 
 ```
+Real code(Setting the templating engine):  
+```bash
+app.set('view engine','ejs');
+app.set('view','app/views');
+```
+   
+Hence, rendering index.js, ROUTES:   
+```bash
+router.get('/',function(req,res){
+res.render ('index');     
+});
+```
+  
+```bash
+res.render('index',{
+	pageTitle: 'Home',
+	pageID: 'home'
+});  
+```
 
-Test
+**INCLUDING VARIABLE IN TEMPLATE**  
+```bash
+<title>ROux Meetup-- <%= pageTitle %></title>
+<body id= "<%= pageTitle %>"> </body>
+```
+  
+  
+**Setting global varaibles :**  
+```bash   
+app.locals.siteTitle = 'Roux Meetups';
+```
+  
+**Which Can Be Used As:**
+```bash
+ <title> <%= siteTitle %> </title>
+```
+  
+
+### Conditionals and loops:    
+  
+#### Conditionals:    
+<% if(typeof artwork !== "undefined") { %>
+	<script src="/js/pixgrid.js"> </script>
+<% } %>
+```  
+  
+  
+### ROUTER:  
+```bash
+router.get('/',function (req,res){
+	var data =req.app.get('appData');
+	var pagePhotos = [];
+
+	res.render('index',{
+		pageTitle: 'Home',
+		pageID: 'home'
+		});
+});  
+  
+  
+data.speakers.forEach(function(item){
+	pagePhotos = pagePhotos.concat(item.artwork);
+});
+
+res.render('index',{
+	pageTitle:'Home',
+	artwork: pagePhotos,
+	pageID: 'home'
+});
+```
+
+In the view, 
+```bash
+<% if (artwork.length>0){
+	for (i=0;i<artwork.length;i++){%>
+	<img src="/images/artwork/<%= artwork[i]%>" alt="Artwork <%= i%>">
+<%	}
+%>
+```
+  
+
+### Creating partials through includes (LAYOUTS):  
+`views/partials/contents and template`
+```bash 
+<head><% include partials/template/head.ejs %></head>
+```  
