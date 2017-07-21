@@ -132,3 +132,15 @@ In the view,
 ```bash 
 <head><% include partials/template/head.ejs %></head>
 ```  
+
+
+```bash 
+<% speakers.forEach(function(item){ %>
+
+// HTML stuff 
+<h3 class="speakerslist-title"> <%= item.title %></h3>
+	
+
+});
+
+```
