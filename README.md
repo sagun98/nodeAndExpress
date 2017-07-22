@@ -144,3 +144,24 @@ In the view,
 });
 
 ```
+
+#### Setting up a regular route:  
+### Feedback (Route):
+```bash
+var express= require('express');
+var router = express.Router();
+
+router.get('/feedback', function(req,res){
+	
+	res.render('index',{
+		pageTitle:'Feedback',
+		pageID : 'home'
+		});
+});
+
+module.exports = router; 
+```
+In app.js route:  
+```bash
+app.use(require('./routes/feedback'));
+```
