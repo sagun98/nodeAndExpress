@@ -1,5 +1,4 @@
-## Notes: 
-
+## Notes: (Node and Express)
   
 ## Creating public folder  
 
