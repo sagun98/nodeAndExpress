@@ -165,3 +165,38 @@ In app.js route:
 ```bash
 app.use(require('./routes/feedback'));
 ```
+
+### Handling POST request:  
+- verbs: GET, POST, DELETE, UPDATE
+- POST: Send data
+- Handle submit with jquery
+- Use body-parser middleware (To handle formatting of the request)
+- Use fs to save data permanently
+
+```bash
+var bodyParser = require ('body-parser');
+var fs = require ('fs');
+
+
+router.use(bodyParser.json());
+router.use(bodyParser.urlencoded({extended: false}));
+
+router.post('/api',function(req,res){
+	feedbackdata.unshift(req.body);
+	fs.writeFile('app/data/feedback.json',JSON.stringify(feedbackData),'utf8',function(err){
+		console.log (err);
+	});
+	res.json(feedbackData);
+});
+```  
+
+### Handling DELETE method:  
+```bash
+	router.delete('/api/:id',function(req,res){
+		feedbackData.splice(req.params.id,1);
+		fs.writeFile('app/data/feedback.json',JSON.stringify(feedbackData),'utf8',function(err){
+			console.log(err);
+		});
+		res.json(feedbackData);
+	});
+```
